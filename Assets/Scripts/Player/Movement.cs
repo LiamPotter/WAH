@@ -153,6 +153,8 @@ namespace WAH.Player
 
         public void DoDrawGizmos()
         {
+            if (!transform)
+                return;
             Gizmos.color = Color.red;
             Ray inputRay = new Ray();
             inputRay.origin = transform.position;
