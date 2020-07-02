@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 397cd3f9857e22240b8b89b35091c6d7, type: 3}
-  m_Name: Movement
+  m_Script: {fileID: 11500000, guid: f66f1a73916876e40bac64b617e5bdd3, type: 3}
+  m_Name: Visual Effects
   m_EditorClassIdentifier: 
-  SpeedCap: 8
-  AccelerationRamp: 8
-  DecelerationRamp: 8
-  TurnSpeed: 1
-  MovementMode: 0
-  DrawGizmos: 1
+  HoverDipHeight: 0.2
+  HoverDipSpeed: 1

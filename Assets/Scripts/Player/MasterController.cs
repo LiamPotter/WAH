@@ -16,13 +16,19 @@ namespace WAH.Player
         [HideInInspector]
         public Transform PTransform;
 
-        //The player rigidbody
+        //The player CharacterController
         [HideInInspector]
-        public Rigidbody PRigidbody;
+        public CharacterController PCharController;
+
+        //The script that control everything player model 
+        [HideInInspector]
+        public ModelHolder PModel;
 
         //The player movement behaviour
-        //[HideInInspector]
-        public BehaviourObject PMovement;
+        public Movement PMovement;
+
+        //The player visual effects behaviour
+        public VisualEffects PVisualEffects;
 
         //If there are any errors in the Start method, this will be set to true.
         //Prevents all code from running in the update & lateupdate loops if true.
@@ -31,13 +37,23 @@ namespace WAH.Player
         void Start()
         {
             PTransform = transform;
-            PRigidbody = GetComponent<Rigidbody>();
+            PCharController = GetComponent<CharacterController>();
+            PModel = GetComponentInChildren<ModelHolder>();
             if (!PMovement)
             {
-                Debug.LogError("You need a player movement script on " + gameObject.name + "!");
+                Debug.LogError("You need a player Movement behaviour object on " + gameObject.name + "!");
                 return;
             }
+            if(!PVisualEffects)
+            {
+                Debug.LogError("You need a player Visual Effects behaviour object on " + gameObject.name + "!");
+                return;
+            }
+          
             noErrorsAllClear = PMovement.Initialize(this);
+
+            if(noErrorsAllClear)
+                noErrorsAllClear = PVisualEffects.Initialize(this);
         }
         private void Update()
         {
@@ -63,6 +79,12 @@ namespace WAH.Player
         protected void DoAllLateUpdates()
         {
             PMovement.LateUpdate();
+        }
+
+        public void OnDrawGizmos()
+        {
+            if (PMovement.DrawGizmos)
+                PMovement.DoDrawGizmos();
         }
     }
 }

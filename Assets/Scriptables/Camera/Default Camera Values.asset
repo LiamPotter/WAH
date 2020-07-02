@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 397cd3f9857e22240b8b89b35091c6d7, type: 3}
-  m_Name: Movement
+  m_Script: {fileID: 11500000, guid: 9cdf9e5ec06eb7b4b9f0b1e786911518, type: 3}
+  m_Name: Default Camera Values
   m_EditorClassIdentifier: 
-  SpeedCap: 8
-  AccelerationRamp: 8
-  DecelerationRamp: 8
-  TurnSpeed: 1
-  MovementMode: 0
-  DrawGizmos: 1
+  values:
+    FollowDeadZone: 0.5
+    FollowMaxDistance: 0.5
+    FollowMaxSpeed: 6
+    FollowMinSpeed: 0.5
