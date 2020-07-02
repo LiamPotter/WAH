@@ -50,7 +50,7 @@ namespace WAH.Player
 
         private Transform transform;
 
-        private Rigidbody playerBody;
+        private CharacterController playerCharController;
 
         private ModelHolder model;
 
@@ -61,15 +61,15 @@ namespace WAH.Player
             master = mController as MasterController;
             transform = master.PTransform;
             model = master.PModel;
-            playerBody = master.PRigidbody;
+            playerCharController = master.PCharController;
             lookDirection = Quaternion.identity;
             lastMovementDirection = model.Movement.forward;
             tweenDirection = Vector3.zero;
 
-            if (!master||!playerBody||!transform||!model)
+            if (!master||!playerCharController||!transform||!model)
             {
                 Debug.LogError("The player Movement cannot initialize!");
-                Debug.Log("Movement Variables: Master-" + master +" Rigidbody-"+ playerBody);
+                Debug.Log("Movement Variables: Master-" + master +" Rigidbody-"+ playerCharController);
                 Debug.Log("Transform-" + transform + " Model-" + model);
                 return false;
             }
@@ -118,9 +118,10 @@ namespace WAH.Player
         }
 
         protected void ApplySpeed()
-        {  
-            playerBody.velocity = model.Movement.forward * currentSpeed;
-            debugVelocity = playerBody.velocity;
+        {
+            //playerBody.velocity = model.Movement.forward * currentSpeed;
+            playerCharController.SimpleMove(model.Movement.forward * currentSpeed);
+            debugVelocity = playerCharController.velocity;
             debugVelocityMag = debugVelocity.magnitude;
         }
 
@@ -160,12 +161,12 @@ namespace WAH.Player
             inputRay.origin = transform.position;
             inputRay.direction = InputOrFacingDirection() * 2;
             Gizmos.DrawRay(inputRay);
-            if (playerBody)
+            if (playerCharController)
             {
                 Gizmos.color = Color.green;
                 Ray velocityRay = new Ray();
                 velocityRay.origin = transform.position;
-                velocityRay.direction = playerBody.velocity;
+                velocityRay.direction = playerCharController.velocity;
                 Gizmos.DrawLine(velocityRay.origin,velocityRay.origin+velocityRay.direction*(currentSpeed*2.5f));
             }
             Gizmos.color = Color.blue;

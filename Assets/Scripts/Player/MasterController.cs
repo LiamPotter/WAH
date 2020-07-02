@@ -16,9 +16,9 @@ namespace WAH.Player
         [HideInInspector]
         public Transform PTransform;
 
-        //The player rigidbody
+        //The player CharacterController
         [HideInInspector]
-        public Rigidbody PRigidbody;
+        public CharacterController PCharController;
 
         //The script that control everything player model 
         [HideInInspector]
@@ -37,7 +37,7 @@ namespace WAH.Player
         void Start()
         {
             PTransform = transform;
-            PRigidbody = GetComponent<Rigidbody>();
+            PCharController = GetComponent<CharacterController>();
             PModel = GetComponentInChildren<ModelHolder>();
             if (!PMovement)
             {

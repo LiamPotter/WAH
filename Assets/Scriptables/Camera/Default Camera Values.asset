@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Default Camera Values
   m_EditorClassIdentifier: 
   values:
-    FollowDeadZone: 0.66
-    FollowMaxDistance: 2
-    FollowMaxSpeed: 3
+    FollowDeadZone: 0.5
+    FollowMaxDistance: 0.5
+    FollowMaxSpeed: 6
     FollowMinSpeed: 0.5
